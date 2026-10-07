@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smartpole vision 智桿視界</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Smartpole vision</p>
+      <h1>智桿視界</h1>
+    </div>
+    <p class="classes" id="class-list">
+      {% if classes %}{{ classes | join(" · ") }}{% else %}best.pt{% endif %}
+    </p>
+  </header>
+
+  <main class="layout">
+    <section class="controls" aria-label="Camera controls">
+      <div class="buttons">
+        <button id="start-btn" type="button">開始攝像頭</button>
+        <button id="stop-btn" type="button" disabled>停止攝像頭</button>
+      </div>
+
+      <label class="conf-field" for="confidence">
+        <span>confidence</span>
+        <input id="confidence" type="number" min="0.01" max="0.99" step="0.05" value="0.25">
+      </label>
+      <input id="confidence-range" type="range" min="0.05" max="0.95" step="0.05" value="0.25" aria-label="confidence slider">
+
+      <p class="status" id="status" role="status">準備就緒</p>
+      <ul class="legend">
+        <li><span class="swatch pole"></span>電線桿 utility poles · 綠色框</li>
+        <li><span class="swatch critical"></span>危急植被 critical vegetation · 紅色框</li>
+        <li><span class="swatch noncritical"></span>非危急植被 non-critical vegetation · 黃色框</li>
+      </ul>
+      <p class="rule">使用 200 圈訓練的 model/best.pt。信心滑桿就是偵測門檻。模型畫出的框會短暫留著，避免分數閃一下就消失。電線桿綠色框，危急植被紅色框，非危急植被黃色框。</p>
+      <p class="hint">模型 train-5 · model/best.pt · 攝像頭 index 0，打不開再試 1、2</p>
+    </section>
+
+    <section class="stage" aria-label="Live camera">
+      <img id="video" alt="YOLO real-time camera detection" hidden>
+      <p class="placeholder" id="placeholder">按「開始攝像頭」</p>
+    </section>
+  </main>
+
+  <script src="/static/script.js" defer></script>
+</body>
+</html>

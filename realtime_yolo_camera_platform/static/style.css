@@ -1,0 +1,250 @@
+:root {
+  --bg: #10140f;
+  --panel: #182117;
+  --ink: #f4f7ef;
+  --muted: #a7b4a3;
+  --line: rgba(214, 255, 74, 0.22);
+  --accent: #d6ff4a;
+  --accent-ink: #17200a;
+  --danger: #ff8d7a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(214, 255, 74, 0.08), transparent 28%),
+    var(--bg);
+}
+
+.topbar,
+.layout {
+  width: min(1180px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: end;
+  padding: 28px 0 18px;
+}
+
+.eyebrow,
+.hint,
+.classes,
+.status {
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.classes {
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 18px;
+  padding-bottom: 36px;
+}
+
+.controls,
+.stage {
+  background: rgba(24, 33, 23, 0.94);
+  border: 1px solid var(--line);
+}
+
+.controls {
+  padding: 18px;
+}
+
+.buttons {
+  display: grid;
+  gap: 10px;
+}
+
+button,
+input[type="number"] {
+  font: inherit;
+}
+
+button {
+  height: 46px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+#start-btn {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+#stop-btn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.conf-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  color: var(--muted);
+}
+
+input[type="number"] {
+  width: 88px;
+  height: 36px;
+  border: 1px solid var(--line);
+  background: #101510;
+  color: var(--ink);
+  text-align: center;
+  font-family: Consolas, "Cascadia Mono", monospace;
+}
+
+input[type="range"] {
+  width: 100%;
+  margin-top: 10px;
+  accent-color: var(--accent);
+}
+
+.status {
+  min-height: 3.2em;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+.hint,
+.rule {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.rule {
+  color: var(--ink);
+}
+
+.legend {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+}
+
+.swatch.pole {
+  background: #28dc28;
+}
+
+.swatch.critical {
+  background: #ff2828;
+}
+
+.swatch.noncritical {
+  background: #ffe600;
+}
+
+.stage {
+  position: relative;
+  min-height: 480px;
+  display: grid;
+  place-items: center;
+  background: #070907;
+  overflow: hidden;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--accent), var(--accent)) left top / 22px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) left top / 2px 22px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) right top / 22px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) right top / 2px 22px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) left bottom / 22px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) left bottom / 2px 22px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) right bottom / 22px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) right bottom / 2px 22px no-repeat;
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+  max-height: 720px;
+  object-fit: contain;
+  background: #000;
+}
+
+.placeholder {
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 860px) {
+  .layout,
+  .topbar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .stage {
+    min-height: 280px;
+  }
+}

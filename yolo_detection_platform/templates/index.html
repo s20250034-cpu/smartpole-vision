@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YOLO 本地檢測平台</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23141812'/%3E%3Cpath d='M8 8h6M8 8v6M24 8h-6M24 8v6M8 24h6M8 24v-6M24 24h-6M24 24v-6' stroke='%23d6ff4a' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <p class="eyebrow">yolo_detection_platform</p>
+        <h1>YOLO 本地檢測平台</h1>
+      </div>
+    </div>
+    <div class="model-chip">
+      <span>模型 best.pt</span>
+      <strong id="class-list">讀取類別中…</strong>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="panel upload-panel" aria-labelledby="upload-title">
+      <h2 id="upload-title">上傳圖片</h2>
+      <p class="lead">選擇一張圖片，再用 best.pt 找出其中的物件。</p>
+
+      <label class="dropzone" id="dropzone">
+        <input id="file-input" type="file" accept=".jpg,.jpeg,.png,.bmp,.webp,image/jpeg,image/png,image/bmp,image/webp">
+        <span class="corners" aria-hidden="true"></span>
+        <img id="local-preview" alt="" hidden>
+        <span class="drop-copy" id="drop-copy">
+          <strong>拖曳圖片到這裡</strong>
+          <span>或點擊選擇檔案</span>
+        </span>
+      </label>
+
+      <p class="file-meta" id="file-meta">尚未選擇圖片</p>
+      <p class="hint">支援 JPG、PNG、BMP、WEBP，單張最大 20MB。</p>
+
+      <label class="threshold" for="confidence">
+        <span>confidence</span>
+        <input id="confidence" type="range" min="0.05" max="0.95" step="0.05" value="0.25">
+        <strong id="confidence-value">0.25</strong>
+      </label>
+
+      <button id="detect-btn" type="button" disabled>開始檢測</button>
+      <p class="status" id="status" role="status"></p>
+    </section>
+
+    <section class="panel result-panel" aria-labelledby="result-title">
+      <div class="result-head">
+        <h2 id="result-title">檢測結果</h2>
+        <p class="count-line">總檢測數量 <strong id="total-count">—</strong></p>
+      </div>
+
+      <div id="await-state" class="await-state">
+        <p>上傳圖片後，點擊「開始檢測」。</p>
+      </div>
+
+      <div id="result-view" hidden>
+        <p id="empty-message" class="empty-message" hidden>沒有檢測到目標</p>
+
+        <div class="image-grid">
+          <figure>
+            <figcaption>原始圖片</figcaption>
+            <img id="original-image" alt="原始圖片">
+            <p class="image-note" id="original-note"></p>
+          </figure>
+          <figure>
+            <figcaption>檢測結果</figcaption>
+            <img id="result-image" alt="檢測後有框線的圖片">
+            <p class="image-note">框線由模型直接繪製並存到 static/results</p>
+          </figure>
+        </div>
+
+        <div class="table-wrap" id="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>類別名稱</th>
+                <th>confidence</th>
+                <th>bbox 座標</th>
+              </tr>
+            </thead>
+            <tbody id="detection-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/script.js" defer></script>
+</body>
+</html>
