@@ -104,6 +104,31 @@ button {
   font-weight: 700;
 }
 
+.source-switch {
+  grid-template-columns: 1fr 1fr;
+}
+
+.source-switch button {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.source-switch button.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.xiao-link-switch {
+  margin-top: 8px;
+}
+
+.xiao-link-switch button {
+  height: 34px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 #start-btn {
   background: var(--accent);
   color: var(--accent-ink);
@@ -159,6 +184,42 @@ input[type="range"] {
   margin-top: 8px;
   font-size: 13px;
   line-height: 1.5;
+}
+
+#xiao-link {
+  display: block;
+  margin-top: 4px;
+}
+
+.hint-form {
+  display: grid;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.hint-form input,
+.hint-form button {
+  height: 34px;
+  font-size: 13px;
+}
+
+.hint-form input {
+  border: 1px solid var(--line);
+  background: #101510;
+  color: var(--ink);
+  padding: 0 8px;
+  font-family: Consolas, "Cascadia Mono", monospace;
+}
+
+.hint-form button {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-weight: 600;
+}
+
+#wifi-note:empty {
+  display: none;
 }
 
 .rule {

@@ -1,0 +1,3 @@
+__pycache__/
+*.py[cod]
+realtime_yolo_camera_platform/xiao_usb_camera/wifi_secret.h

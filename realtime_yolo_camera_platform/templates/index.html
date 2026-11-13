@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smartpole vision 智桿視界</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v=5">
 </head>
 <body>
   <header class="topbar">
@@ -19,6 +19,11 @@
 
   <main class="layout">
     <section class="controls" aria-label="Camera controls">
+      <div class="buttons source-switch" role="group" aria-label="鏡頭來源">
+        <button id="source-pc" class="active" type="button">電腦鏡頭</button>
+        <button id="source-xiao" type="button">XIAO 鏡頭</button>
+      </div>
+
       <div class="buttons">
         <button id="start-btn" type="button">開始攝像頭</button>
         <button id="stop-btn" type="button" disabled>停止攝像頭</button>
@@ -37,7 +42,17 @@
         <li><span class="swatch noncritical"></span>非危急植被 non-critical vegetation · 黃色框</li>
       </ul>
       <p class="rule">使用 200 圈訓練的 model/best.pt。信心滑桿就是偵測門檻。模型畫出的框會短暫留著，避免分數閃一下就消失。電線桿綠色框，危急植被紅色框，非危急植被黃色框。</p>
-      <p class="hint">模型 train-5 · model/best.pt · 攝像頭 index 0，打不開再試 1、2</p>
+      <p class="hint" id="hint">先選電腦鏡頭或 XIAO 鏡頭，再按開始。兩邊都用 model/best.pt 做電線桿和植被偵測。<span id="xiao-link">XIAO 鏡頭：尚未連接。</span></p>
+      <div class="buttons source-switch xiao-link-switch" role="group" aria-label="XIAO 連線方式">
+        <button id="link-usb" class="active" type="button">USB 連接</button>
+        <button id="link-wifi" type="button">Wi-Fi 連接</button>
+      </div>
+      <form id="xiao-wifi" class="hint-form" hidden>
+        <input id="wifi-ssid" name="ssid" maxlength="32" placeholder="Wi-Fi SSID" aria-label="Wi-Fi SSID" autocomplete="off">
+        <input id="wifi-pass" name="password" type="password" maxlength="63" placeholder="Wi-Fi 密碼" aria-label="Wi-Fi 密碼" autocomplete="off">
+        <button id="wifi-btn" type="submit">連接 Wi-Fi 並開啟鏡頭</button>
+        <p class="hint" id="wifi-note"></p>
+      </form>
     </section>
 
     <section class="stage" aria-label="Live camera">
@@ -46,6 +61,6 @@
     </section>
   </main>
 
-  <script src="/static/script.js" defer></script>
+  <script src="/static/script.js?v=6" defer></script>
 </body>
 </html>
